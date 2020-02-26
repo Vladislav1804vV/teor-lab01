@@ -42,14 +42,22 @@ def load_image(name):
     return ImageTk.PhotoImage(img)
 
 
-def invisible_pic():
+def set_default_widget():
     A_pic.place_forget()
     P_pic.place_forget()
     C_pic.place_forget()
+    txt.delete(0, END)
+    result.delete(0, END)
+    result.insert(0, "0")
+    inputN.delete(0, END)
+    inputN.insert(0, 0)
+    inputK.delete(0, END)
+    inputK.insert(0, 0)
 
 
 def change_input_data(obj):
-    invisible_pic()
+
+    set_default_widget()
     curr = cb_selectformul.get()
     if curr == "Сочетание без повторения":
         inputK.configure(state="normal")
@@ -68,13 +76,19 @@ def change_input_data(obj):
 def check_subsets(tuple):
     sum = 0
     for i in tuple:
+        if int(i) < 0:
+            messagebox.showerror('Ошибка', 'Неправильные данные, введены отрицательные значения')
+            return -1
         sum += int(i)
     return sum == int(inputN.get())
 
 
 def calc_result():
     result.delete(0, END)
-    if inputN.get() < inputK.get():
+
+    if int(inputN.get()) < 0 or int(inputK.get())<0:
+        messagebox.showerror('Ошибка', 'Неправильные данные, введены отрицательные значения')
+    elif inputN.get() < inputK.get():
         messagebox.showerror('Ошибка', 'Неправильные данные, должно соблюдаться условие N >= K')
     else:
         curr = cb_selectformul.get()
@@ -85,9 +99,10 @@ def calc_result():
         if curr == "Перестановки с повторением":
             tuple = txt.get()
             tuple = tuple.split(",")
-            if check_subsets(tuple):
+            check = check_subsets(tuple)
+            if check == 1:
                 result.insert(0, permutations_with_repeat(int(inputN.get()), tuple))
-            else:
+            elif check == 0:
                 messagebox.showerror('Ошибка', 'Неправильные данные, должно соблюдаться условие \n n = n1+n2+..n_k')
 
 

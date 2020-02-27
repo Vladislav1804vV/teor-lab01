@@ -209,26 +209,26 @@ label_k.place(x=10, y=250)
 K = Spinbox(tab2, from_=0, to=10000, width=5)
 K.place(x=14, y=280)
 
+label_l = Label(tab2,
+                    text="Введите l")
+label_l.place(x=80, y=250)
+
+L = Spinbox(tab2, from_=0, to=10000, width=5)
+L.place(x=84, y=280)
+
 label_r = Label(tab2,
                     text="Введите r")
-label_r.place(x=80, y=250)
+label_r.place(x=150, y=250)
 
 R = Spinbox(tab2, from_=0, to=10000, width=5)
-R.place(x=84, y=280)
+R.place(x=154, y=280)
 
-label_S = Label(tab2,
+label_s = Label(tab2,
                     text="Введите S")
-label_S.place(x=150, y=250)
+label_s.place(x=220, y=250)
 
 S = Spinbox(tab2, from_=0, to=10000, width=5)
-S.place(x=154, y=280)
-
-label_n = Label(tab2,
-                    text="Введите n")
-label_n.place(x=220, y=250)
-
-N = Spinbox(tab2, from_=0, to=10000, width=5)
-N.place(x=224, y=280)
+S.place(x=224, y=280)
 
 btn_result2 = Button(tab2, text="Посчитать", command=calc_result)
 btn_result2.place(x=290, y=270)
@@ -238,8 +238,8 @@ label_result = Label(tab2,
                     text="Результат ")
 label_result.place(x=10, y=310)
 
-result = Entry(tab2, width=160)
-result.place(x=10, y=330)
+result2 = Entry(tab2, width=160)
+result2.place(x=10, y=330)
 
 # ============================================================================================
 

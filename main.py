@@ -41,11 +41,21 @@ def calc_exer1():
     s = int(S_.get())
     r = int(R.get())
 
-    calc = combination_wo_repeat(l, s) * combination_wo_repeat((k - l), (r - s)) / combination_wo_repeat(k, r)
-
-    result2.delete(0, END)
-    result2.insert(0, calc)
-
+    if k < 0 or l < 0 or s < 0 or r < 0:
+        messagebox.showerror('Ошибка', 'Неправильные данные, введены отрицательные значения')
+    elif l < k and r <= k and s <= l and r-s <= k-l:
+        calc = combination_wo_repeat(l, s) * combination_wo_repeat((k - l), (r - s)) / combination_wo_repeat(k, r)
+        result2.delete(0, END)
+        result2.insert(0, calc)
+    else:
+        if l >= k:
+            messagebox.showerror('Ошибка', 'Неправильные данные, должно соблюдаться условие l < k')
+        if r > k:
+            messagebox.showerror('Ошибка', 'Неправильные данные, должно соблюдаться условие r <= k')
+        if s > l:
+            messagebox.showerror('Ошибка', 'Неправильные данные, должно соблюдаться условие s <= l')
+        if r-s > k-l:
+            messagebox.showerror('Ошибка', 'Неправильные данные, должно соблюдаться условие r-s <= k-l')
 
 # =====================================================================================================
 
@@ -126,8 +136,8 @@ window.configure(background='#FFFFFF')
 tab_control = ttk.Notebook(window)
 tab1 = ttk.Frame(tab_control)
 tab2 = ttk.Frame(tab_control)
-tab_control.add(tab1, text='Первая')
-tab_control.add(tab2, text='Вторая')
+tab_control.add(tab1, text='Задание 1')
+tab_control.add(tab2, text='Задание 2')
 tab_control.pack(expand=1, fill='both')
 
 # Загрузка изображений

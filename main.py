@@ -35,6 +35,18 @@ def combination_wo_repeat(n, m):
     return result
 
 
+def calc_exer1():
+    k = int(K.get())
+    l = int(L.get())
+    s = int(S_.get())
+    r = int(R.get())
+
+    calc = combination_wo_repeat(l, s) * combination_wo_repeat((k - l), (r - s)) / combination_wo_repeat(k, r)
+
+    result2.delete(0, END)
+    result2.insert(0, calc)
+
+
 # =====================================================================================================
 
 def load_image(name):
@@ -56,7 +68,6 @@ def set_default_widget():
 
 
 def change_input_data(obj):
-
     set_default_widget()
     curr = cb_selectformul.get()
     if curr == "Сочетание без повторения":
@@ -87,7 +98,7 @@ def calc_result():
     result.delete(0, END)
     curr = cb_selectformul.get()
 
-    if int(inputN.get()) < 0 or int(inputK.get())<0:
+    if int(inputN.get()) < 0 or int(inputK.get()) < 0:
         messagebox.showerror('Ошибка', 'Неправильные данные, введены отрицательные значения')
     elif int(inputN.get()) < int(inputK.get()) and curr == "Сочетание без повторения":
         messagebox.showerror('Ошибка', 'Неправильные данные, должно соблюдаться условие N >= K')
@@ -203,39 +214,39 @@ F_pic.place(x=400, y=150)
 F_pic.configure(border='0px')
 
 label_k = Label(tab2,
-                    text="Введите k")
+                text="Введите k")
 label_k.place(x=10, y=250)
 
 K = Spinbox(tab2, from_=0, to=10000, width=5)
 K.place(x=14, y=280)
 
 label_l = Label(tab2,
-                    text="Введите l")
+                text="Введите l")
 label_l.place(x=80, y=250)
 
 L = Spinbox(tab2, from_=0, to=10000, width=5)
 L.place(x=84, y=280)
 
 label_r = Label(tab2,
-                    text="Введите r")
+                text="Введите r")
 label_r.place(x=150, y=250)
 
 R = Spinbox(tab2, from_=0, to=10000, width=5)
 R.place(x=154, y=280)
 
 label_s = Label(tab2,
-                    text="Введите S")
+                text="Введите S")
 label_s.place(x=220, y=250)
 
-S = Spinbox(tab2, from_=0, to=10000, width=5)
-S.place(x=224, y=280)
+S_ = Spinbox(tab2, from_=0, to=10000, width=5)
+S_.place(x=224, y=280)
 
-btn_result2 = Button(tab2, text="Посчитать", command=calc_result)
+btn_result2 = Button(tab2, text="Посчитать", command=calc_exer1)
 btn_result2.place(x=290, y=270)
 btn_result2.configure(background='#f9a19a')
 
 label_result = Label(tab2,
-                    text="Результат ")
+                     text="Результат ")
 label_result.place(x=10, y=310)
 
 result2 = Entry(tab2, width=160)

@@ -190,11 +190,56 @@ cb_selectformul.bind("<<ComboboxSelected>>", change_input_data)
 # =====================================================================================================
 
 W = load_image("zadacha.png")
+F = load_image("formula.png")
 
 W_pic = Label(tab2, image=W, anchor=NW)
 W_pic.image = W
 W_pic.place(x=100, y=20)
 W_pic.configure(border='0px')
+
+F_pic = Label(tab2, image=F, anchor=NW)
+F_pic.image = F
+F_pic.place(x=400, y=150)
+F_pic.configure(border='0px')
+
+label_k = Label(tab2,
+                    text="Введите k")
+label_k.place(x=10, y=250)
+
+K = Spinbox(tab2, from_=0, to=10000, width=5)
+K.place(x=14, y=280)
+
+label_r = Label(tab2,
+                    text="Введите r")
+label_r.place(x=80, y=250)
+
+R = Spinbox(tab2, from_=0, to=10000, width=5)
+R.place(x=84, y=280)
+
+label_S = Label(tab2,
+                    text="Введите S")
+label_S.place(x=150, y=250)
+
+S = Spinbox(tab2, from_=0, to=10000, width=5)
+S.place(x=154, y=280)
+
+label_n = Label(tab2,
+                    text="Введите n")
+label_n.place(x=220, y=250)
+
+N = Spinbox(tab2, from_=0, to=10000, width=5)
+N.place(x=224, y=280)
+
+btn_result2 = Button(tab2, text="Посчитать", command=calc_result)
+btn_result2.place(x=290, y=270)
+btn_result2.configure(background='#f9a19a')
+
+label_result = Label(tab2,
+                    text="Результат ")
+label_result.place(x=10, y=310)
+
+result = Entry(tab2, width=160)
+result.place(x=10, y=330)
 
 # ============================================================================================
 

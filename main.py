@@ -62,15 +62,15 @@ def change_input_data(obj):
     if curr == "Сочетание без повторения":
         inputK.configure(state="normal")
         txt.configure(state="disabled")
-        C_pic.place(x=500, y=30)
+        C_pic.place(x=350, y=30)
     if curr == "Размещение с повторением":
         inputK.configure(state="normal")
         txt.configure(state="disabled")
-        A_pic.place(x=500, y=30)
+        A_pic.place(x=350, y=30)
     if curr == "Перестановки с повторением":
         inputK.configure(state="disabled")
         txt.configure(state="normal")
-        P_pic.place(x=500, y=30)
+        P_pic.place(x=350, y=30)
 
 
 def check_subsets(tuple):
@@ -85,13 +85,13 @@ def check_subsets(tuple):
 
 def calc_result():
     result.delete(0, END)
+    curr = cb_selectformul.get()
 
     if int(inputN.get()) < 0 or int(inputK.get())<0:
         messagebox.showerror('Ошибка', 'Неправильные данные, введены отрицательные значения')
-    elif inputN.get() < inputK.get():
+    elif int(inputN.get()) < int(inputK.get()) and curr == "Сочетание без повторения":
         messagebox.showerror('Ошибка', 'Неправильные данные, должно соблюдаться условие N >= K')
     else:
-        curr = cb_selectformul.get()
         if curr == "Сочетание без повторения":
             result.insert(0, combination_wo_repeat(int(inputN.get()), int(inputK.get())))
         if curr == "Размещение с повторением":
@@ -108,8 +108,16 @@ def calc_result():
 
 # Создание окна
 window = Tk()
-window.title("Lab01")
-window.geometry('1200x400')
+window.title("Лабораторная работа №1. Элементы теории вероятностей.")
+window.geometry('1000x400')
+window.configure(background='#FFFFFF')
+
+tab_control = ttk.Notebook(window)
+tab1 = ttk.Frame(tab_control)
+tab2 = ttk.Frame(tab_control)
+tab_control.add(tab1, text='Первая')
+tab_control.add(tab2, text='Вторая')
+tab_control.pack(expand=1, fill='both')
 
 # Загрузка изображений
 A = load_image("accommodation.png")
@@ -117,61 +125,77 @@ C = load_image("combination.png")
 P = load_image("permutations.png")
 
 # Создание изображений в окне
-A_pic = Label(window, image=A, anchor=NW)
+A_pic = Label(tab1, image=A, anchor=NW)
 A_pic.image = A
-A_pic.place(x=500, y=30)
+A_pic.place(x=400, y=60)
+A_pic.configure(border='0px')
 
-P_pic = Label(window, image=P, anchor=NW)
+P_pic = Label(tab1, image=P, anchor=NW)
 P_pic.image = P
+P_pic.configure(border='0px')
 
-C_pic = Label(window, image=C, anchor=NW)
+C_pic = Label(tab1, image=C, anchor=NW)
 C_pic.image = C
+C_pic.configure(border='0px')
 
 # Размещение элементов в окне
-label_form = Label(window,
+label_form = Label(tab1,
                    text="Выберите формулу")
-label_form.place(x=10, y=10)
+label_form.place(x=10, y=40)
 
-cb_selectformul = ttk.Combobox(window,
+cb_selectformul = ttk.Combobox(tab1,
                                values=[
                                    "Сочетание без повторения",
                                    "Размещение с повторением",
                                    "Перестановки с повторением"], width=35, state="readonly")
-cb_selectformul.place(x=14, y=40)
+cb_selectformul.place(x=14, y=70)
 cb_selectformul.current(0)
 
-label_form1 = Label(window,
+label_form1 = Label(tab1,
                     text="Введите n")
-label_form1.place(x=10, y=80)
+label_form1.place(x=10, y=110)
 
-inputN = Spinbox(window, from_=0, to=10000, width=5)
-inputN.place(x=14, y=110)
+inputN = Spinbox(tab1, from_=0, to=10000, width=5)
+inputN.place(x=14, y=140)
 
-label_form2 = Label(window,
+label_form2 = Label(tab1,
                     text="Введите k ")
-label_form2.place(x=150, y=80)
+label_form2.place(x=150, y=110)
 
-inputK = Spinbox(window, from_=0, to=10000, width=5)
-inputK.place(x=154, y=110)
+inputK = Spinbox(tab1, from_=0, to=10000, width=5)
+inputK.place(x=154, y=140)
 
-label_form2 = Label(window,
+label_form2 = Label(tab1,
                     text="Введите подмножество повторяющихся элементов ")
-label_form2.place(x=10, y=150)
+label_form2.place(x=10, y=180)
 
-txt = Entry(window, width=30)
-txt.place(x=14, y=180)
+txt = Entry(tab1, width=30)
+txt.place(x=14, y=210)
 
-label_form3 = Label(window,
+label_form3 = Label(tab1,
                     text="Результат ")
-label_form3.place(x=10, y=260)
+label_form3.place(x=10, y=290)
 
-result = Entry(window, width=150)
-result.place(x=10, y=290)
+result = Entry(tab1, width=160)
+result.place(x=10, y=310)
 
-btn_result = Button(window, text="Посчитать", command=calc_result)
-btn_result.place(x=10, y=220)
+btn_result = Button(tab1, text="Посчитать", command=calc_result)
+btn_result.place(x=10, y=250)
+btn_result.configure(background='#f9a19a')
 
 change_input_data(None)
 
 cb_selectformul.bind("<<ComboboxSelected>>", change_input_data)
+
+# =====================================================================================================
+
+W = load_image("zadacha.png")
+
+W_pic = Label(tab2, image=W, anchor=NW)
+W_pic.image = W
+W_pic.place(x=100, y=20)
+W_pic.configure(border='0px')
+
+# ============================================================================================
+
 window.mainloop()
